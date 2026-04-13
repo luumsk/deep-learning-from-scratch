@@ -1,6 +1,6 @@
 {
   "dataset_name": "toy_vietnamese_food_words",
-  "num_vocab_items": 110,
+  "num_vocab_items": 113,
   "num_sentences": 500,
   "seed": 42,
   "files": {

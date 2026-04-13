@@ -1,16 +1,19 @@
 {
+  "pronouns": [
+    "tôi",
+    "bạn",
+    "chúng tôi",
+    "họ"
+  ],
   "dishes": [
     "phở",
     "bún",
-    "bún chả",
-    "bún bò",
     "hủ tiếu",
     "mì",
     "miến",
     "cháo",
     "xôi",
-    "cơm tấm",
-    "cơm rang",
+    "cơm",
     "bánh mì",
     "bánh cuốn",
     "bánh xèo",
@@ -19,7 +22,7 @@
     "chả giò",
     "bánh chưng",
     "bánh bao",
-    "chè"
+    "bánh bột lọc"
   ],
   "drinks": [
     "cà phê",
@@ -58,16 +61,19 @@
     "ớt"
   ],
   "flavors": [
+    "ngon",
     "ngọt",
     "mặn",
-    "chua",
     "cay",
     "béo",
     "thơm",
     "đậm đà",
-    "nhẹ",
     "giòn",
-    "mềm"
+    "mềm",
+    "nóng",
+    "lạnh",
+    "tươi",
+    "vừa miệng"
   ],
   "ingredients": [
     "nước mắm",
@@ -90,8 +96,7 @@
     "kho",
     "rim",
     "trộn",
-    "nấu",
-    "ăn"
+    "nấu"
   ],
   "actions": [
     "thích",
@@ -101,9 +106,7 @@
     "uống",
     "mua",
     "chọn",
-    "thử",
-    "trộn",
-    "thêm"
+    "thử"
   ],
   "contexts": [
     "bữa sáng",
@@ -118,15 +121,17 @@
     "mùa hè"
   ],
   "places_descriptors": [
-    "quán",
     "nhà",
     "chợ",
-    "đường phố",
-    "nhà hàng",
-    "ngon",
-    "rẻ",
-    "nóng",
-    "lạnh",
-    "tươi"
+    "nhà hàng sang trọng",
+    "quán ăn bình dân",
+    "quán quen trong con hẻm nhỏ",
+    "góc phố",
+    "quán cóc vỉa hè",
+    "hàng quán",
+    "quán cà phê",
+    "siêu thị",
+    "trong bếp",
+    "sân vườn"
   ]
 }

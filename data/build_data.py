@@ -14,18 +14,21 @@ DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent / "vietnamese_food"
 def build_vocab() -> dict[str, list[str]]:
     """Return a toy Vietnamese food vocabulary grouped by category."""
     return {
+        "pronouns": [
+            "tôi",
+            "bạn",
+            "chúng tôi",
+            "họ",
+        ],
         "dishes": [
             "phở",
             "bún",
-            "bún chả",
-            "bún bò",
             "hủ tiếu",
             "mì",
             "miến",
             "cháo",
             "xôi",
-            "cơm tấm",
-            "cơm rang",
+            "cơm",
             "bánh mì",
             "bánh cuốn",
             "bánh xèo",
@@ -34,7 +37,7 @@ def build_vocab() -> dict[str, list[str]]:
             "chả giò",
             "bánh chưng",
             "bánh bao",
-            "chè",
+            "bánh bột lọc",
         ],
         "drinks": [
             "cà phê",
@@ -73,16 +76,19 @@ def build_vocab() -> dict[str, list[str]]:
             "ớt",
         ],
         "flavors": [
+            "ngon",
             "ngọt",
             "mặn",
-            "chua",
             "cay",
             "béo",
             "thơm",
             "đậm đà",
-            "nhẹ",
             "giòn",
             "mềm",
+            "nóng",
+            "lạnh",
+            "tươi",
+            "vừa miệng"
         ],
         "ingredients": [
             "nước mắm",
@@ -106,7 +112,6 @@ def build_vocab() -> dict[str, list[str]]:
             "rim",
             "trộn",
             "nấu",
-            "ăn",
         ],
         "actions": [
             "thích",
@@ -117,8 +122,6 @@ def build_vocab() -> dict[str, list[str]]:
             "mua",
             "chọn",
             "thử",
-            "trộn",
-            "thêm",
         ],
         "contexts": [
             "bữa sáng",
@@ -133,16 +136,18 @@ def build_vocab() -> dict[str, list[str]]:
             "mùa hè",
         ],
         "places_descriptors": [
-            "quán",
             "nhà",
             "chợ",
-            "đường phố",
-            "nhà hàng",
-            "ngon",
-            "rẻ",
-            "nóng",
-            "lạnh",
-            "tươi",
+            "nhà hàng sang trọng",
+            "quán ăn bình dân",
+            "quán quen trong con hẻm nhỏ",
+            "góc phố",
+            "quán cóc vỉa hè",
+            "hàng quán",
+            "quán cà phê",
+            "siêu thị",
+            "trong bếp",
+            "sân vườn",
         ],
     }
 
@@ -162,9 +167,9 @@ def generate_sentences(
     sentences: list[str] = []
 
     templates = [
-        lambda: f"tôi thích {rng.choice(vocab['dishes'])}",
+        lambda: f"{rng.choice(vocab['pronouns'])} thích {rng.choice(vocab['dishes'])}",
         lambda: (
-            f"tôi ăn {rng.choice(vocab['dishes'])} "
+            f"{rng.choice(vocab['pronouns'])} ăn {rng.choice(vocab['dishes'])} "
             f"vào {rng.choice(vocab['contexts'])}"
         ),
         lambda: f"{rng.choice(vocab['dishes'])} có {rng.choice(vocab['proteins'])}",
@@ -173,28 +178,17 @@ def generate_sentences(
             f"có {rng.choice(vocab['vegetables_herbs'])}"
         ),
         lambda: (
-            f"{rng.choice(vocab['drinks'])} "
-            f"rất {rng.choice(vocab['flavors'])}"
-        ),
-        lambda: (
-            f"{rng.choice(vocab['dishes'])} "
-            f"rất {rng.choice(vocab['flavors'])}"
-        ),
-        lambda: (
-            f"tôi uống {rng.choice(vocab['drinks'])} "
+            f"{rng.choice(vocab['pronouns'])} uống {rng.choice(vocab['drinks'])} "
             f"vào {rng.choice(vocab['contexts'])}"
         ),
         lambda: (
-            f"{rng.choice(vocab['ingredients'])} "
-            f"làm món ăn {rng.choice(vocab['flavors'])}"
-        ),
-        lambda: (
-            f"mẹ {rng.choice(vocab['cooking_methods'])} "
-            f"{rng.choice(vocab['dishes'])} "
+            f"có người đang {rng.choice(vocab['cooking_methods'])} "
+            f"{rng.choice(vocab['proteins'])} "
             f"ở {rng.choice(vocab['places_descriptors'])}"
         ),
         lambda: (
-            f"tôi gọi {rng.choice(vocab['dishes'])} "
+            f"{rng.choice(vocab['pronouns'])} "
+            f"gọi {rng.choice(vocab['dishes'])} "
             f"và {rng.choice(vocab['drinks'])}"
         ),
         lambda: (
@@ -202,9 +196,10 @@ def generate_sentences(
             f"ăn với {rng.choice(vocab['ingredients'])}"
         ),
         lambda: (
+            f"{rng.choice(vocab['pronouns'])} "
+            f"{rng.choice(vocab['actions'])} "
             f"{rng.choice(vocab['dishes'])} "
-            f"ở {rng.choice(vocab['places_descriptors'])} "
-            f"rất {rng.choice(vocab['places_descriptors'])}"
+            f"ở {rng.choice(vocab['places_descriptors'])}"
         ),
     ]
 
