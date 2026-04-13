@@ -24,6 +24,10 @@ class Embedding:
         self.last_token_ids = token_ids
         return self.weight[token_ids]
 
+    def get_vector(self, token_id: int) -> np.ndarray:
+        """Return embedding vector for a single token ID."""
+        return self.weight[token_id]
+
     def backward(
         self,
         grad_output: np.ndarray,
@@ -195,16 +199,6 @@ def train_skipgram_embeddings(
     return embedding, output_weight, loss_history
 
 
-def lookup_embedding(
-    word: str,
-    token_to_id: dict[str, int],
-    embedding: Embedding,
-) -> np.ndarray:
-    """Return the learned embedding vector for one word."""
-    word_id = token_to_id[word]
-    return embedding.weight[word_id]
-
-
 def cosine_similarity(vec_a: np.ndarray, vec_b: np.ndarray) -> float:
     """Compute cosine similarity between two vectors."""
     norm_a = np.linalg.norm(vec_a)
@@ -222,13 +216,17 @@ def find_nearest_words(
     top_k: int = 5,
 ) -> list[tuple[str, float]]:
     """Find nearest words using learned embedding vectors."""
-    query_vector = lookup_embedding(query_word, token_to_id, embedding)
+    word_id = token_to_id.get(query_word)
+    if word_id is None:
+        raise ValueError(f"Query word '{query_word}' not found in vocabulary.")
+    
+    query_vector = embedding.get_vector(word_id)
     scores: list[tuple[str, float]] = []
 
     for token in tokens:
         if token == query_word:
             continue
-        candidate_vector = lookup_embedding(token, token_to_id, embedding)
+        candidate_vector = embedding.get_vector(token_to_id[token])
         score = cosine_similarity(query_vector, candidate_vector)
         scores.append((token, score))
 
